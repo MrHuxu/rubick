@@ -5,8 +5,8 @@ class Menu extends Component {
   render () {
     return (
       <AppBar
-        title              = "Rubick"
-        iconClassNameRight = "muidocs-icon-navigation-expand-more"
+        title = 'Rubick'
+        iconClassNameRight = 'muidocs-icon-navigation-expand-more'
       />
     );
   }

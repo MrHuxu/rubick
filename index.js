@@ -9,8 +9,8 @@ injectTapEventPlugin();
 
 import App from './components/app';
 
-render (
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
+render(
+  <MuiThemeProvider muiTheme = {getMuiTheme()}>
     <App />
   </MuiThemeProvider>,
   document.getElementById('rubick')
