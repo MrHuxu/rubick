@@ -15,11 +15,11 @@ app.on('window-all-closed', function () {
 
 app.on('ready', function () {
   mainWindow = new BrowserWindow({
+    frame        : false,
     width        : 1200,
     height       : 700,
     'min-width'  : 1100,
-    'min-height' : 650,
-    frame        : false
+    'min-height' : 650
   });
   mainWindow.loadURL(path.join('file://', __dirname, '/index.html'));
   mainWindow.openDevTools();
