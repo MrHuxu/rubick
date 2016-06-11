@@ -5,7 +5,7 @@ import { styles } from './styles';
 
 import Menu from '../menu';
 import LeftNav from '../left-nav';
-import Tools from '../tools';
+import Tool from '../tool';
 
 @Radium
 class App extends Component {
@@ -16,29 +16,20 @@ class App extends Component {
     };
   }
 
-  _changeTool (name) {
-    this.setState({
-      toolName: name
-    });
-  }
-
   render () {
     return (
       <div>
         <Style rules={styles.common} />
         <Menu />
-        <span
+        <div
           className = 'full-height'
           style = {styles.leftNav}
         >
           <LeftNav />
-        </span>
-        <span
-          className = 'full-height'
-          style = {styles.content}
-        >
-          {Tools[this.state.toolName]}
-        </span>
+        </div>
+        <div style={styles.content}>
+          <Tool name={this.state.toolName}/>
+        </div>
       </div>
     );
   }

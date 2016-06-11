@@ -4,6 +4,10 @@ export const styles = {
       margin : '0px'
     },
 
+    body : {
+      overflow : 'hidden'
+    },
+
     '.full-height' : {
       height : '100%'
     },
@@ -13,12 +17,16 @@ export const styles = {
     }
   },
 
-  leftNav: {
-    width: '25%',
-    borderRight: '1px solid #aaa'
+  leftNav : {
+    display     : 'inline-block',
+    width       : '25%',
+    borderRight : '1px solid #aaa'
   },
 
-  content: {
-    width: '75%'
+  content : {
+    display       : 'inline-block',
+    width         : '70%',
+    verticalAlign : 'top',
+    padding       : '0 0 0 2%'
   }
 };
