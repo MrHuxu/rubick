@@ -11,4 +11,8 @@ class Tool extends Component {
   }
 }
 
+Tool.propTypes = {
+  name : React.PropTypes.string.isRequired
+};
+
 export default Tool;
