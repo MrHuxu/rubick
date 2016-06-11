@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 
-@Radium
 class Menu extends Component {
   render () {
     return (

@@ -5,7 +5,7 @@
   "repository": "https://github.com/MrHuxu/rubick",
   "main": "./vendor/dist/main.js",
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js . --fix --ignore-path .gitignore; exit 0",
+    "lint": "./node_modules/eslint/bin/eslint.js . --fix --ignore-path .gitignore --ext .jsx --ext .js; exit 0",
     "dev": "NODE_ENV=development node server --harmony",
     "build": "./node_modules/webpack/bin/webpack.js",
     "prd-ele": "npm run build && NODE_ENV=production /Applications/Electron.app/Contents/MacOS/Electron .",

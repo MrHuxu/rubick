@@ -12,14 +12,14 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      toolName: 'format-json'
+      toolName : 'weather'
     };
   }
 
   render () {
     return (
-      <div className='full-height'>
-        <Style rules={styles.common} />
+      <div className = 'full-height'>
+        <Style rules = {styles.common} />
         <Menu />
         <div
           className = 'full-height'
@@ -31,7 +31,7 @@ class App extends Component {
           className = 'full-height'
           style = {styles.content}
         >
-          <Tool name={this.state.toolName}/>
+          <Tool name = {this.state.toolName} />
         </div>
       </div>
     );
