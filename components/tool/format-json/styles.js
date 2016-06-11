@@ -9,6 +9,6 @@ export const styles = {
     display       : 'inline-block',
     verticalAlign : 'top',
     width         : '49%',
-    padding       : '3% 0 0 0'
+    padding       : '5% 0 0 0'
   }
 };

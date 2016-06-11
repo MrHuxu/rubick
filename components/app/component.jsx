@@ -18,7 +18,7 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div className='full-height'>
         <Style rules={styles.common} />
         <Menu />
         <div
@@ -27,7 +27,10 @@ class App extends Component {
         >
           <LeftNav />
         </div>
-        <div style={styles.content}>
+        <div
+          className = 'full-height'
+          style = {styles.content}
+        >
           <Tool name={this.state.toolName}/>
         </div>
       </div>

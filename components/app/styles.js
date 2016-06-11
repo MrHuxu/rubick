@@ -8,7 +8,7 @@ export const styles = {
       overflow : 'hidden'
     },
 
-    '.full-height' : {
+    'html, body, .full-height' : {
       height : '100%'
     },
 

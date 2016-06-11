@@ -1,33 +1,19 @@
-const app = require('app');
 const path = require('path');
-const BrowserWindow = require('browser-window');
-const Menu = require('menu');
+const { app, BrowserWindow, Menu } = require('electron');
+let win;
 
-require('crash-reporter').start();
-
-var mainWindow = null;
-
-app.on('window-all-closed', function () {
-  if ('darwin' !== process.platform) {
-    app.quit();
-  }
-});
-
-app.on('ready', function () {
-  mainWindow = new BrowserWindow({
+function createWindow () {
+  win = new BrowserWindow({
     frame        : false,
     width        : 1200,
     height       : 700,
     'min-width'  : 1100,
     'min-height' : 650
   });
-  mainWindow.loadURL(path.join('file://', __dirname, '/index.html'));
-  mainWindow.openDevTools();
-  mainWindow.on('closed', function () {
-    mainWindow = null;
-  });
 
-  // Create the Application's main menu
+  win.loadURL(path.join('file://', __dirname, '/index.html'));
+  win.webContents.openDevTools();
+
   var template = [{
     label   : 'Application',
     submenu : [
@@ -48,4 +34,22 @@ app.on('ready', function () {
     }];
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+
+  win.on('closed', () => {
+    win = null;
+  });
+}
+
+app.on('ready', createWindow);
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (null === win) {
+    createWindow();
+  }
 });
