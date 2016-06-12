@@ -10,15 +10,37 @@ class LeftNav extends Component {
     return (
       <div>
         <List>
-          <ListItem primaryText = 'Format JSON' leftIcon = {<ContentInbox />} />
-          <ListItem primaryText = 'Weather' leftIcon = {<ActionGrade />} />
-          <ListItem primaryText = 'Sent mail' leftIcon = {<ContentSend />} />
-          <ListItem primaryText = 'Drafts' leftIcon = {<ContentDrafts />} />
-          <ListItem primaryText = 'Inbox' leftIcon = {<ContentInbox />} />
+          <ListItem
+            onClick = {this.props.changeTool.bind(null, 'format-json')}
+            primaryText = 'Format JSON'
+            leftIcon = {<ContentInbox />}
+          />
+          <ListItem
+            onClick = {this.props.changeTool.bind(null, 'ip-info')}
+            primaryText = 'IP Info'
+            leftIcon = {<ActionGrade />}
+          />
+          <ListItem
+            onClick = {this.props.changeTool.bind(null, 'weather')}
+            primaryText = 'Weather'
+            leftIcon = {<ContentSend />}
+          />
+          <ListItem
+            primaryText = 'Drafts'
+            leftIcon = {<ContentDrafts />}
+          />
+          <ListItem
+            primaryText = 'Inbox'
+            leftIcon = {<ContentInbox />}
+          />
         </List>
       </div>
     );
   }
 }
+
+LeftNav.propTypes = {
+  changeTool : React.PropTypes.func.isRequired
+};
 
 export default LeftNav;

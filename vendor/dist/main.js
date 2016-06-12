@@ -4,11 +4,11 @@ let win;
 
 function createWindow () {
   win = new BrowserWindow({
-    frame        : false,
-    width        : 1200,
-    height       : 700,
-    'min-width'  : 1100,
-    'min-height' : 650
+    frame     : false,
+    width     : 1200,
+    height    : 700,
+    minWidth  : 1100,
+    minHeight : 650
   });
 
   win.loadURL(path.join('file://', __dirname, '/index.html'));

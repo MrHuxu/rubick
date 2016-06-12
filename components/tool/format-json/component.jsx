@@ -35,8 +35,11 @@ class FormatJSON extends Component {
 
   render () {
     return (
-      <div>
-        <div style = {styles.text}>
+      <div className = 'full-height'>
+        <div
+          className = 'full-height'
+          style = {styles.text}
+        >
           <TextField
             fullWidth
             multiLine
@@ -52,7 +55,7 @@ class FormatJSON extends Component {
         <Snackbar
           open = {this.state.showSnack}
           message = {this.state.errorMessage}
-          autoHideDuration = {5000}
+          autoHideDuration = {4000}
           onRequestClose = {this.handleRequestClose}
         />
       </div>

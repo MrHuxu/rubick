@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 import FormatJson from './format-json';
-import Weather from './weather';
+import IpInfo from './ip-info';
 
 class Tool extends Component {
   render () {
     return (
-      <div>
+      <div className = 'full-height'>
         {'format-json' === this.props.name ? <FormatJson /> : null}
-        {'weather' === this.props.name ? <Weather /> : null}
+        {'ip-info' === this.props.name ? <IpInfo /> : null}
       </div>
     );
   }

@@ -12,8 +12,14 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      toolName : 'weather'
+      toolName : 'ip-info'
     };
+  }
+
+  _changeTool (name) {
+    this.setState({
+      toolName : name
+    });
   }
 
   render () {
@@ -25,7 +31,7 @@ class App extends Component {
           className = 'full-height'
           style = {styles.leftNav}
         >
-          <LeftNav />
+          <LeftNav changeTool = {this._changeTool.bind(this)} />
         </div>
         <div
           className = 'full-height'

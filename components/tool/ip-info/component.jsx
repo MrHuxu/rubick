@@ -50,7 +50,7 @@ class Weather extends Component {
       <div className = 'full-height'>
         {
           this.state.status ? (
-            <p>{JSON.stringify(this.state.point)}</p>
+            <p>{JSON.stringify(this.state)}</p>
           ) : (
             <RefreshIndicator
               size = {50}

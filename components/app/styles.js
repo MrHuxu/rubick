@@ -19,13 +19,13 @@ export const styles = {
 
   leftNav : {
     display     : 'inline-block',
-    width       : '25%',
+    width       : '23%',
     borderRight : '1px solid #aaa'
   },
 
   content : {
     display       : 'inline-block',
-    width         : '70%',
+    width         : '72%',
     verticalAlign : 'top',
     padding       : '0 0 0 2%'
   }
