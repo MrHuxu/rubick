@@ -1,3 +1,3 @@
-import Weather from './component';
+import IpInfo from './component';
 
-export default Weather;
+export default IpInfo;

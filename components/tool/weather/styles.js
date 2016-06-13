@@ -1,8 +1,8 @@
-import { orange400 } from 'material-ui/styles/colors';
+import { pink400 } from 'material-ui/styles/colors';
 
 export const styles = {
   input : {
-    color : orange400
+    color : pink400
   },
 
   refresh : {

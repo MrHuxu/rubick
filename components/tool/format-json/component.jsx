@@ -47,6 +47,7 @@ class FormatJSON extends Component {
             hintText = 'JSON Content'
             floatingLabelText = 'Please Input JSON Content Here'
             onChange = {this._updateJSON.bind(this)}
+            floatingLabelStyle = {styles.floatingText}
           />
         </div>
         <div style = {styles.preview}>

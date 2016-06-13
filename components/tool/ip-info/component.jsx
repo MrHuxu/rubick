@@ -1,10 +1,14 @@
 import $ from 'jquery';
 import React, { Component } from 'react';
+import TextField from 'material-ui/TextField';
+import ActionSearch from 'material-ui/svg-icons/action/search';
+import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import { orange400 } from 'material-ui/styles/colors';
 
 import { styles } from './styles';
 
-class Weather extends Component {
+class IpInfo extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -40,6 +44,15 @@ class Weather extends Component {
   render () {
     return (
       <div className = 'full-height'>
+        <TextField
+          hintText = 'IP Address'
+          floatingLabelText = 'Please input IP adress here'
+          floatingLabelStyle = {styles.input}
+        />
+        <RaisedButton
+          backgroundColor = {orange400}
+          icon = {<ActionSearch />}
+        />
         {
           this.state.status ? (
             <p>{JSON.stringify(this.state)}</p>
@@ -48,7 +61,7 @@ class Weather extends Component {
               size = {50}
               left = {70}
               top = {0}
-              loadingColor = {"#FF9800"}
+              loadingColor = {orange400}
               status = 'loading'
               style = {styles.refresh}
             />
@@ -59,4 +72,4 @@ class Weather extends Component {
   }
 }
 
-export default Weather;
+export default IpInfo;
