@@ -2,15 +2,7 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-const style = {
-  container : {
-    position : 'relative'
-  },
-  refresh : {
-    display  : 'inline-block',
-    position : 'relative'
-  }
-};
+import { styles } from './styles';
 
 class Weather extends Component {
   constructor (props) {
@@ -58,7 +50,7 @@ class Weather extends Component {
               top = {0}
               loadingColor = {"#FF9800"}
               status = 'loading'
-              style = {style.refresh}
+              style = {styles.refresh}
             />
           )
         }

@@ -6,6 +6,10 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 
 class LeftNav extends Component {
+  static propTypes = {
+    changeTool : React.PropTypes.func.isRequired
+  };
+
   render () {
     return (
       <div>
@@ -38,9 +42,5 @@ class LeftNav extends Component {
     );
   }
 }
-
-LeftNav.propTypes = {
-  changeTool : React.PropTypes.func.isRequired
-};
 
 export default LeftNav;
