@@ -2,7 +2,6 @@ import { cyan400, orange400, pink400 } from 'material-ui/styles/colors';
 
 export const styles = {
   common : {
-    margin : '0 0 0 -10px'
   },
 
   'format-json' : {
@@ -15,9 +14,5 @@ export const styles = {
 
   'weather' : {
     borderLeft : `10px solid ${pink400}`
-  },
-
-  selected : {
-    margin : '0 0 0 0'
   }
 };

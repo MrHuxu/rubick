@@ -21,9 +21,8 @@ class LeftNav extends Component {
           primaryText = 'Format JSON'
           leftIcon = {<ContentInbox />}
           style = {Object.assign(
-            {},
-            styles['format-json'],
-            'format-json' === this.props.toolName ? styles.selected : styles.common
+            'format-json' === this.props.toolName ? styles['format-json'] : {},
+            styles.common
           )}
         />
         <ListItem
@@ -31,9 +30,8 @@ class LeftNav extends Component {
           primaryText = 'IP Info'
           leftIcon = {<ActionGrade />}
           style = {Object.assign(
-            {},
-            styles['ip-info'],
-            'ip-info' === this.props.toolName ? styles.selected : styles.common
+            'ip-info' === this.props.toolName ? styles['ip-info'] : {},
+            styles.common
           )}
         />
         <ListItem
@@ -41,9 +39,8 @@ class LeftNav extends Component {
           primaryText = 'Weather'
           leftIcon = {<ContentSend />}
           style = {Object.assign(
-            {},
-            styles['weather'],
-            'weather' === this.props.toolName ? styles.selected : styles.common
+            'weather' === this.props.toolName ? styles['weather'] : {},
+            styles.common
           )}
         />
         <ListItem
