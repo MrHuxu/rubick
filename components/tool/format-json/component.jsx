@@ -3,6 +3,7 @@ import Radium from 'radium';
 import JSONTree from 'react-json-tree';
 import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
+import { Card, CardText } from 'material-ui/Card';
 
 import { styles } from './styles';
 
@@ -36,23 +37,25 @@ class FormatJSON extends Component {
   render () {
     return (
       <div className = 'full-height'>
-        <div
-          className = 'full-height'
-          style = {styles.text}
-        >
-          <TextField
-            fullWidth
-            multiLine
-            rows = {22}
-            hintText = 'JSON Content'
-            floatingLabelText = 'Please Input JSON Content Here'
-            onChange = {this._updateJSON.bind(this)}
-            floatingLabelStyle = {styles.floatingText}
-          />
-        </div>
-        <div style = {styles.preview}>
-          <JSONTree data = {this.state.jsonContent} shouldExpandNode = {() => true} />
-        </div>
+        <Card style = {styles.text}>
+          <CardText>
+            <TextField
+              fullWidth
+              multiLine
+              rows = {20}
+              hintText = 'JSON Content'
+              floatingLabelText = 'Please Input JSON Content Here'
+              onChange = {this._updateJSON.bind(this)}
+              floatingLabelStyle = {styles.floatingText}
+            />
+          </CardText>
+        </Card>
+
+        <Card style = {styles.preview}>
+          <CardText>
+            <JSONTree data = {this.state.jsonContent} shouldExpandNode = {() => true} />
+          </CardText>
+        </Card>
         <Snackbar
           open = {this.state.showSnack}
           message = {this.state.errorMessage}
