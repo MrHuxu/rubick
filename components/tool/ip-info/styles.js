@@ -9,6 +9,10 @@ export const styles = {
     width : '35%'
   },
 
+  infos : {
+    margin : '30px 0 0 0'
+  },
+
   refresh : {
     display  : 'inline-block',
     position : 'relative'
