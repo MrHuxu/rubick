@@ -5,6 +5,10 @@ export const styles = {
     color : orange400
   },
 
+  point : {
+    width : '35%'
+  },
+
   refresh : {
     display  : 'inline-block',
     position : 'relative'
