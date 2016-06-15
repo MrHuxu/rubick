@@ -45,10 +45,7 @@ class IpInfo extends Component {
         dataType : 'jsonp'
       }).done((data, status, xhr) => {
         if (data.status) {
-          this.setState({
-            showSnack    : true,
-            errorMessage : data.message
-          });
+          this._showErrorMessage(data.message);
         } else {
           this.setState({
             showSnack : false,
@@ -65,19 +62,23 @@ class IpInfo extends Component {
     });
   }
 
+  _showErrorMessage (text) {
+    this.setState({
+      showSnack: true,
+      errorMessage: text
+    });
+  }
+
+  _validateIp (text) {
+    var toNum = (str) => str.length > 0 ? Number(str) : undefined;
+    var valid = (num) => num >= 0 && num <= 255;
+    var nums = text.split('.').map(toNum);
+    return 4 === nums.length && 4 === nums.filter(valid).length;
+  }
+
   _updateIp (event, text) {
     if (text.length) {
-      var toNum = (str) => str.length > 0 ? Number(str) : undefined;
-      var valid = (num) => num >= 0 && num <= 255;
-      var nums = text.split('.').map(toNum);
-      if (4 === nums.length && 4 === nums.filter(valid).length) {
-        this._fetchAddressInfo(text);
-      } else {
-        this.setState({
-          showSnack    : true,
-          errorMessage : 'Invalid IP address'
-        });
-      }
+      this._validateIp(text) ? this._fetchAddressInfo(text) : this._showErrorMessage('Invalid IP address');
     } else {
       this._fetchAddressInfo();
     }
