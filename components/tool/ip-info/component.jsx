@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import ActionSearch from 'material-ui/svg-icons/action/search';
-import IconButton from 'material-ui/IconButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import { orange400 } from 'material-ui/styles/colors';
 import {List, ListItem} from 'material-ui/List';
@@ -34,42 +32,54 @@ class IpInfo extends Component {
 
   _fetchAddressInfo (ip) {
     var url = `http://api.map.baidu.com/location/ip?ak=7E34039cd9a903ed6209f42e6e797e7e${ip ? '&ip=' + ip : ''}&coor=bd09ll`;
-    $.ajax({
-      url      : url,
-      type     : 'GET',
-      dataType : 'jsonp'
-    }).done((data, status, xhr) => {
-      if (data.status) {
-        this.setState({
-          showSnack    : true,
-          errorMessage : data.message
-        });
-      } else {
-        this.setState({
-          showSnack : false,
-          status    : true,
-          ip        : ip,
-          address   : data.content.address,
-          point     : {
-            longitude : data.content.point.x,
-            latitude  : data.content.point.y
-          }
-        });
-      }
+    var getLocalIP =  new Promise((resolve, reject) => {
+      $.getJSON('http://ipinfo.io/', (data) => {
+        resolve(data.ip);
+      });
+    });
+
+    (ip ? Promise.resolve(ip) : getLocalIP).then((ip) => {
+      $.ajax({
+        url      : url,
+        type     : 'GET',
+        dataType : 'jsonp'
+      }).done((data, status, xhr) => {
+        if (data.status) {
+          this.setState({
+            showSnack    : true,
+            errorMessage : data.message
+          });
+        } else {
+          this.setState({
+            showSnack : false,
+            status    : true,
+            ip        : ip,
+            address   : data.content.address,
+            point     : {
+              longitude : data.content.point.x,
+              latitude  : data.content.point.y
+            }
+          });
+        }
+      });
     });
   }
 
   _updateIp (event, text) {
-    var toNum = (str) => str.length > 0 ? Number(str) : undefined;
-    var valid = (num) => num >= 0 && num <= 255;
-    var nums = text.split('.').map(toNum);
-    if (4 === nums.length && 4 === nums.filter(valid).length) {
-      this._fetchAddressInfo(text);
+    if (text.length) {
+      var toNum = (str) => str.length > 0 ? Number(str) : undefined;
+      var valid = (num) => num >= 0 && num <= 255;
+      var nums = text.split('.').map(toNum);
+      if (4 === nums.length && 4 === nums.filter(valid).length) {
+        this._fetchAddressInfo(text);
+      } else {
+        this.setState({
+          showSnack    : true,
+          errorMessage : 'Invalid IP address'
+        });
+      }
     } else {
-      this.setState({
-        showSnack    : true,
-        errorMessage : 'Invalid IP address'
-      });
+      this._fetchAddressInfo();
     }
   }
 
@@ -82,9 +92,6 @@ class IpInfo extends Component {
           floatingLabelStyle = {styles.input}
           onChange = {this._updateIp.bind(this)}
         />
-        <IconButton>
-          <ActionSearch color = {orange400} />
-        </IconButton>
         <div style = {styles.infos}>
         {
           this.state.status ? (
