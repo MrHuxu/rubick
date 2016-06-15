@@ -64,8 +64,8 @@ class IpInfo extends Component {
 
   _showErrorMessage (text) {
     this.setState({
-      showSnack: true,
-      errorMessage: text
+      showSnack    : true,
+      errorMessage : text
     });
   }
 
