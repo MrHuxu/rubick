@@ -30,6 +30,18 @@ class IpInfo extends Component {
     this._fetchAddressInfo();
   }
 
+  _refreshMap (long, lat) {
+    var map = new BMap.Map('allmap');            // 创建Map实例
+    map.centerAndZoom(new BMap.Point(long, lat), 14);
+    var local = new BMap.LocalSearch(map, {
+      renderOptions : {
+        map          : map,
+        autoViewport : true
+      }
+    });
+    local.search('井格火锅');
+  }
+
   _fetchAddressInfo (ip) {
     var url = `http://api.map.baidu.com/location/ip?ak=7E34039cd9a903ed6209f42e6e797e7e${ip ? '&ip=' + ip : ''}&coor=bd09ll`;
     var getLocalIP =  new Promise((resolve, reject) => {
@@ -57,6 +69,7 @@ class IpInfo extends Component {
               latitude  : data.content.point.y
             }
           });
+          this._refreshMap(data.content.point.x, data.content.point.y);
         }
       });
     });
@@ -87,26 +100,41 @@ class IpInfo extends Component {
   render () {
     return (
       <div className = 'full-height'>
-        <TextField
-          hintText = 'IP Address'
-          floatingLabelText = 'Please input IP adress here'
-          floatingLabelStyle = {styles.input}
-          onChange = {this._updateIp.bind(this)}
-        />
-        <div style = {styles.infos}>
+        <div>
+          <TextField
+            hintText = 'IP Address'
+            floatingLabelText = 'Please input IP adress here'
+            floatingLabelStyle = {styles.input}
+            onChange = {this._updateIp.bind(this)}
+          />
+        </div>
+
         {
           this.state.status ? (
-            <Card style = {styles.point}>
-              <CardText>
-                <List>
-                  {this.state.ip ? <ListItem> IP: {this.state.ip}</ListItem> : null}
-                  <ListItem> Address: {this.state.address}</ListItem>
-                  <Divider />
-                  <ListItem> Longitude: {this.state.point.longitude}</ListItem>
-                  <ListItem> Latitude: {this.state.point.latitude}</ListItem>
-                </List>
-              </CardText>
-            </Card>
+            <div style = {{
+              verticalalign : 'top'
+            }}>
+              <div style = {styles.point}>
+                <Card>
+                  <CardText>
+                    <List>
+                      {this.state.ip ? <ListItem> IP: {this.state.ip}</ListItem> : null}
+                      <ListItem> Address: {this.state.address}</ListItem>
+                      <Divider />
+                      <ListItem> Longitude: {this.state.point.longitude}</ListItem>
+                      <ListItem> Latitude: {this.state.point.latitude}</ListItem>
+                    </List>
+                  </CardText>
+                </Card>
+              </div>
+              <Card style = {styles.mapContainer}>
+                <CardText>
+                  <div
+                    id = 'allmap'
+                    style = {styles.map} />
+                </CardText>
+              </Card>
+            </div>
           ) : (
             <RefreshIndicator
               size = {50}
@@ -118,7 +146,6 @@ class IpInfo extends Component {
             />
           )
         }
-        </div>
         <Snackbar
           open = {this.state.showSnack}
           message = {this.state.errorMessage}
