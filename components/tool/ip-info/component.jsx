@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import ActionSearch from 'material-ui/svg-icons/action/search';
-import IconButton from 'material-ui/IconButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import { orange400 } from 'material-ui/styles/colors';
 import {List, ListItem} from 'material-ui/List';
@@ -32,73 +30,111 @@ class IpInfo extends Component {
     this._fetchAddressInfo();
   }
 
+  _refreshMap (long, lat) {
+    var map = new BMap.Map('allmap');            // 创建Map实例
+    map.centerAndZoom(new BMap.Point(long, lat), 14);
+    var local = new BMap.LocalSearch(map, {
+      renderOptions : {
+        map          : map,
+        autoViewport : true
+      }
+    });
+    local.search('井格火锅');
+  }
+
   _fetchAddressInfo (ip) {
     var url = `http://api.map.baidu.com/location/ip?ak=7E34039cd9a903ed6209f42e6e797e7e${ip ? '&ip=' + ip : ''}&coor=bd09ll`;
-    $.ajax({
-      url      : url,
-      type     : 'GET',
-      dataType : 'jsonp'
-    }).done((data, status, xhr) => {
-      if (data.status) {
-        this.setState({
-          showSnack    : true,
-          errorMessage : data.message
-        });
-      } else {
-        this.setState({
-          showSnack : false,
-          status    : true,
-          ip        : ip,
-          address   : data.content.address,
-          point     : {
-            longitude : data.content.point.x,
-            latitude  : data.content.point.y
-          }
-        });
-      }
+    var getLocalIP =  new Promise((resolve, reject) => {
+      $.getJSON('http://ipinfo.io/', (data) => {
+        resolve(data.ip);
+      });
+    });
+
+    (ip ? Promise.resolve(ip) : getLocalIP).then((ip) => {
+      $.ajax({
+        url      : url,
+        type     : 'GET',
+        dataType : 'jsonp'
+      }).done((data, status, xhr) => {
+        if (data.status) {
+          this._showErrorMessage(data.message);
+        } else {
+          this.setState({
+            showSnack : false,
+            status    : true,
+            ip        : ip,
+            address   : data.content.address,
+            point     : {
+              longitude : data.content.point.x,
+              latitude  : data.content.point.y
+            }
+          });
+          this._refreshMap(data.content.point.x, data.content.point.y);
+        }
+      });
     });
   }
 
-  _updateIp (event, text) {
+  _showErrorMessage (text) {
+    this.setState({
+      showSnack    : true,
+      errorMessage : text
+    });
+  }
+
+  _validateIp (text) {
     var toNum = (str) => str.length > 0 ? Number(str) : undefined;
     var valid = (num) => num >= 0 && num <= 255;
     var nums = text.split('.').map(toNum);
-    if (4 === nums.length && 4 === nums.filter(valid).length) {
-      this._fetchAddressInfo(text);
+    return 4 === nums.length && 4 === nums.filter(valid).length;
+  }
+
+  _updateIp (event, text) {
+    if (text.length) {
+      this._validateIp(text) ? this._fetchAddressInfo(text) : this._showErrorMessage('Invalid IP address');
     } else {
-      this.setState({
-        showSnack    : true,
-        errorMessage : 'Invalid IP address'
-      });
+      this._fetchAddressInfo();
     }
   }
 
   render () {
     return (
       <div className = 'full-height'>
-        <TextField
-          hintText = 'IP Address'
-          floatingLabelText = 'Please input IP adress here'
-          floatingLabelStyle = {styles.input}
-          onChange = {this._updateIp.bind(this)}
-        />
-        <IconButton>
-          <ActionSearch color = {orange400} />
-        </IconButton>
-        <div style = {styles.infos}>
+        <div>
+          <TextField
+            hintText = 'IP Address'
+            floatingLabelText = 'Please input IP adress here'
+            floatingLabelStyle = {styles.input}
+            onChange = {this._updateIp.bind(this)}
+          />
+        </div>
+
         {
           this.state.status ? (
-            <Card style = {styles.point}>
-              <CardText>
-                <List>
-                  {this.state.ip ? <ListItem> IP: {this.state.ip}</ListItem> : null}
-                  <ListItem> Address: {this.state.address}</ListItem>
-                  <Divider />
-                  <ListItem> Longitude: {this.state.point.longitude}</ListItem>
-                  <ListItem> Latitude: {this.state.point.latitude}</ListItem>
-                </List>
-              </CardText>
-            </Card>
+            <div style = {{
+              verticalalign : 'top'
+            }}>
+              <div style = {styles.point}>
+                <Card>
+                  <CardText>
+                    <List>
+                      {this.state.ip ? <ListItem> IP: {this.state.ip}</ListItem> : null}
+                      <ListItem> Address: {this.state.address}</ListItem>
+                      <Divider />
+                      <ListItem> Longitude: {this.state.point.longitude}</ListItem>
+                      <ListItem> Latitude: {this.state.point.latitude}</ListItem>
+                    </List>
+                  </CardText>
+                </Card>
+              </div>
+              <Card style = {styles.mapContainer}>
+                <CardText>
+                  <div
+                    id = 'allmap'
+                    style = {styles.map} />
+                </CardText>
+              </Card>
+            </div>
           ) : (
             <RefreshIndicator
               size = {50}
@@ -110,7 +146,6 @@ class IpInfo extends Component {
             />
           )
         }
-        </div>
         <Snackbar
           open = {this.state.showSnack}
           message = {this.state.errorMessage}
