@@ -31,9 +31,11 @@ class IpInfo extends Component {
   }
 
   _refreshMap (long, lat) {
-    var map = new BMap.Map('allmap');            // 创建Map实例
+    /* eslint-disable */
+    var map = new BMap.Map('allmap');
     map.centerAndZoom(new BMap.Point(long, lat), 14);
     var local = new BMap.LocalSearch(map, {
+    /* eslint-enable */
       renderOptions : {
         map          : map,
         autoViewport : true

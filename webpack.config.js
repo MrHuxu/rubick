@@ -2,8 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  devtool : 'eval',
-  entry   : [
+  entry : [
     'webpack-dev-server/client?http://localhost:7001',
     'webpack/hot/only-dev-server',
     './index'
@@ -34,7 +33,7 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map',
+  devtool : 'source-map',
   plugins : [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
