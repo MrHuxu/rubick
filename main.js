@@ -1,6 +1,6 @@
 const path = require('path');
 const { app, BrowserWindow, Menu } = require('electron');
-let win;
+var win;
 
 function createWindow () {
   win = new BrowserWindow({
@@ -8,7 +8,9 @@ function createWindow () {
     width     : 1100,
     height    : 700,
     minWidth  : 1000,
-    minHeight : 650
+    minHeight : 650,
+    maxWidth  : 1100,
+    maxHeight : 700
   });
 
   win.loadURL(path.join('file://', __dirname, '/index.html'));

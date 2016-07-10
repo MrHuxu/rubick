@@ -1,12 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
-  entry : [
-    'webpack-dev-server/client?http://localhost:7001',
-    'webpack/hot/only-dev-server',
-    './index'
-  ],
+  entry  : ['./index'],
   output : {
     path     : path.join(__dirname, 'dist'),
     filename : 'bundle.js'
@@ -33,9 +28,5 @@ module.exports = {
       }
     ]
   },
-  devtool : 'source-map',
-  plugins : [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
+  devtool : 'source-map'
 };
