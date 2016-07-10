@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "description": "some useful tools for me",
   "repository": "https://github.com/MrHuxu/rubick",
-  "main": "./vendor/dist/main.js",
+  "main": "./main.js",
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js . --fix --ignore-path .gitignore --ext .jsx --ext .js; exit 0",
-    "dev": "NODE_ENV=development node server --harmony",
     "build": "./node_modules/webpack/bin/webpack.js",
     "prd-ele": "npm run build && NODE_ENV=production /Applications/Electron.app/Contents/MacOS/Electron .",
     "test": "mocha"
