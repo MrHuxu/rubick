@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import FormatJson from './format-json';
-import IpInfo from './ip-info';
+import ProcessManager from './process-manager';
 import Weather from './weather';
 
 class Tool extends Component {
@@ -9,7 +9,7 @@ class Tool extends Component {
     return (
       <div className = 'full-height'>
         {'format-json' === this.props.name ? <FormatJson /> : null}
-        {'ip-info' === this.props.name ? <IpInfo /> : null}
+        {'process-manager' === this.props.name ? <ProcessManager /> : null}
         {'weather' === this.props.name ? <Weather /> : null}
       </div>
     );

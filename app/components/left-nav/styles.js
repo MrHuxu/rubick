@@ -8,7 +8,7 @@ export const styles = {
     borderLeft : `10px solid ${cyan400}`
   },
 
-  'ip-info' : {
+  'process-manager' : {
     borderLeft : `10px solid ${orange400}`
   },
 

@@ -10,7 +10,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 import { styles } from './styles';
 
-class IpInfo extends Component {
+class ProcessManager extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -47,7 +47,7 @@ class IpInfo extends Component {
   _fetchAddressInfo (ip) {
     var url = `http://api.map.baidu.com/location/ip?ak=7E34039cd9a903ed6209f42e6e797e7e${ip ? '&ip=' + ip : ''}&coor=bd09ll`;
     var getLocalIP =  new Promise((resolve, reject) => {
-      $.getJSON('http://ipinfo.io/', (data) => {
+      $.getJSON('http://ProcessManager.io/', (data) => {
         resolve(data.ip);
       });
     });
@@ -159,4 +159,4 @@ class IpInfo extends Component {
   }
 }
 
-export default IpInfo;
+export default ProcessManager;

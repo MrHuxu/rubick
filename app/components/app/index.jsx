@@ -12,7 +12,7 @@ import Tool from '../tool';
 class App extends Component {
   static mapToolToColor = {
     'format-json' : cyan400,
-    'ip-info'     : orange400,
+    'process-manager'     : orange400,
     'weather'     : pink400
   };
 

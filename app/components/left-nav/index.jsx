@@ -26,11 +26,11 @@ class LeftNav extends Component {
           )}
         />
         <ListItem
-          onClick = {this.props.changeTool.bind(null, 'ip-info')}
-          primaryText = 'IP Info'
+          onClick = {this.props.changeTool.bind(null, 'process-manager')}
+          primaryText = 'Process Manager'
           leftIcon = {<ActionGrade />}
           style = {Object.assign(
-            'ip-info' === this.props.toolName ? styles['ip-info'] : {},
+            'process-manager' === this.props.toolName ? styles['process-manager'] : {},
             styles.common
           )}
         />

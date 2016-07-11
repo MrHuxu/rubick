@@ -13,7 +13,7 @@ function createWindow () {
     maxHeight : 700
   });
 
-  win.loadURL(path.join('file://', __dirname, '/index.html'));
+  win.loadURL(path.join('file://', __dirname, 'app', '/index.html'));
   win.webContents.openDevTools();
 
   var template = [{
